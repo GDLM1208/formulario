@@ -1,0 +1,112 @@
+---
+interface Props {
+	opcionIzq: string;
+	opcionDer?: string;
+	numeroOpciones?: number;
+}
+
+const { opcionIzq, opcionDer, numeroOpciones } = Astro.props;
+
+const opciones = Array.from({ length: numeroOpciones || 7 }, (_, i) => i + 1);
+---
+
+<article class="question">
+	<div class="options">
+		<span class="label-left">{opcionIzq}</span>
+		{opciones.map((opcion) => (
+			<label class="option">
+				<input type="radio" name="opcion" value={opcion} />
+				{opcion}
+			</label>
+		))}
+		{opcionDer && <span class="label-right">{opcionDer}</span>}
+	</div>
+</article>
+
+<style>
+	.question {
+		margin-bottom: 20px;
+	}
+
+	.question label {
+		display: block;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	.question span {
+		font-size: small;
+	}
+
+	.options {
+		display: flex;
+		align-items: center;
+		justify-content: space-between
+	}
+
+
+	.options input[type="radio"] {
+		margin-right: 5px;
+	}
+
+	.label-left, .label-right {
+		width: 100px;
+		text-align: center;
+	}
+
+	input[type="radio"] {
+            display: none;
+        }
+
+        /* Estilo para el contenedor del radio */
+	.option {
+            display: inline-block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            user-select: none;
+        }
+
+        /* Estilo para el círculo del radio personalizado */
+        .option::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        /* Estilo para el círculo del radio activo */
+        input[type="radio"]:checked + label::before {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        /* Estilo para el punto interior del radio personalizado */
+        label::after {
+            content: "";
+            position: absolute;
+            left: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 10px;
+            width: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Estilo para el punto interior del radio activo */
+        input[type="radio"]:checked + label::after {
+            opacity: 1;
+        }
+</style>

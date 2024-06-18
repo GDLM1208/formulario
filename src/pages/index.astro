@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OpenQuestion from '../components/OpenQuestion.astro';
+import OptionQuestion from '../components/OptionQuestion.astro';
+
+---
+<Layout title="Encuesta de Bienestar Laboral">
+	<div class="form-container">
+        <form method="post" action="/Envio">
+			<h4>Sección 1: Salud Física</h4>
+			<OptionQuestion numPregunta={1} pregunta="¿Cómo calificarías tu estado de salud física en general?" opciones={["Excelente", "Buena", "Regular", "Mala", "Muy mala"]}/>
+			<OptionQuestion numPregunta={2} pregunta="¿Con qué frecuencia realizas actividad física?" opciones={["Diariamente", "Varias veces a la semana", "Semanalmente", "Mensualmente", "Raramente/Nunca"]}/>
+			<OptionQuestion numPregunta={3} pregunta="¿Sufres de alguna condición médica crónica?" opciones={["Si", "No"]}/>
+			<OpenQuestion pregunta="Si la respuesta es sí, ¿Cuál?" esSubPregunta />
+			<OptionQuestion numPregunta={4} pregunta="¿Experimentas dolor físico relacionado con tu trabajo?" opciones={["Si", "No"]}/>
+			<OpenQuestion pregunta="Si la respuesta es sí, ¿En qué áreas?" esSubPregunta />
+
+			<h4>Sección 2: Salud Mental</h4>
+			<OptionQuestion numPregunta={5} pregunta="¿Cómo calificarías tu salud mental en general?" opciones={["Excelente", "Buena", "Regular", "Mala", "Muy mala"]}/>
+			<OptionQuestion numPregunta={6} pregunta="¿Con qué frecuencia te sientes estresado debido al trabajo?" opciones={["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"]}/>
+			<OptionQuestion numPregunta={7} pregunta="¿Con qué frecuencia te sientes ansioso o deprimido?" opciones={["Nunca", "Raramente", "A veces", "Frecuentemente", "Siempre"]}/>
+			<OptionQuestion numPregunta={8} pregunta="¿Sientes que tienes un buen equilibrio entre tu vida laboral y personal?" opciones={["Si", "No"]}/>
+
+			<h4>Sección 3: Motivación</h4>
+			<OptionQuestion numPregunta={9} pregunta="¿Qué tan motivado te sientes en tu trabajo diario?" opciones={["Muy motivado", "Motivado", "Neutral", "Desmotivado", "Muy desmotivado"]}/>
+			<OptionQuestion numPregunta={10} pregunta="¿Sientes que tus logros son reconocidos adecuadamente en el trabajo?" opciones={["Siempre", "Frecuentemente", "A veces", "Raramente", "Nunca"]}/>
+			<OptionQuestion numPregunta={11} pregunta="¿Te sientes valorado como empleado en la empresa?" opciones={["Siempre", "Frecuentemente", "A veces", "Raramente", "Nunca"]}/>
+			<OptionQuestion numPregunta={12} pregunta="¿Qué tan satisfecho estás con las oportunidades de crecimiento profesional en tu empresa?" opciones={["Muy satisfecho", "Satisfecho", "Neutral", "Insatisfecho", "Muy insatisfecho"]}/>
+
+			<h4>Sección 4: Actividad Física</h4>
+			<OptionQuestion numPregunta={13} pregunta="¿Participas en algún programa de bienestar físico por la empresa?" opciones={["Si", "No"]}/>
+			<OptionQuestion numPregunta={14} pregunta="¿Con qué frecuencia utilizas las instalaciones de actividad física (gimnasio, clases de yoga, etc.) proporcionadas por la empresa?" opciones={["Diariamente", "Varias veces a la semana", "Semanalmente", "Mensualmente", "Raramente/Nunca"]}/>
+			<OptionQuestion numPregunta={15} pregunta="¿Te gustaría que la empresa ofreciera más programas o actividades relacionadas con la salud física?" opciones={["Si", "No"]}/>
+			<OpenQuestion pregunta="Si la respuesta es sí, ¿Qué tipo de programas o actividades te gustaría ver?" esSubPregunta />
+
+			<h4>Sección 5: Comentarios Generales</h4>
+			<OpenQuestion pregunta='¿Qué sugerencias tienes para mejorar tu bienestar en el trabajo?' />
+			<OpenQuestion pregunta='¿Hay algo más que te gustaría compartir sobre tu experiencia laboral?' />
+
+			<button type="submit" class="btn-submit">
+				<div class="svg-wrapper-1">
+					<div class="svg-wrapper">
+					  <svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						width="24"
+						height="24"
+					  >
+						<path fill="none" d="M0 0h24v24H0z"></path>
+						<path
+						  fill="currentColor"
+						  d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+						></path>
+					  </svg>
+					</div>
+				  </div>
+				  <span>Enviar</span>
+			</button>
+			<div>
+			</div>
+		</form>
+	</div>	
+</Layout>
+<style>
+	.form-container {
+		width: 700px;
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		margin: auto;
+	}
+
+	h3 {
+		text-align: center;
+		margin-bottom: 20px;
+		font-size: 1.5em;
+		color: #333;
+	}
+
+	.question-ind {
+		display: block;
+		text-align: center;
+		margin-bottom: 20px;
+		font-size: 1.1em;
+		color: #555;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	.btn-submit {
+		background: royalblue;
+		padding: 0.7em 1em;
+		padding-left: 0.9em;
+		color: white;
+		align-self: center;
+		font-family: inherit;
+		font-size: 20px;
+		display: flex;
+		align-items: center;
+		border: none;
+		border-radius: 16px;
+		overflow: hidden;
+		transition: all 0.2s;
+		cursor: pointer;
+	}
+
+	.btn-submit span {
+		display: block;
+		margin-left: 0.3em;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.btn-submit svg {
+		display: block;
+		transform-origin: center center;
+		transition: transform 0.3s ease-in-out;
+	}
+
+	.btn-submit:hover .svg-wrapper {
+		animation: fly-1 0.6s ease-in-out infinite alternate;
+	}
+
+	.btn-submit:hover svg {
+		transform: translateX(1.2em) rotate(45deg) scale(1.1);
+	}
+
+	.btn-submit:hover span {
+		transform: translateX(5em);
+	}
+
+	.btn-submit:active {
+		transform: scale(0.95);
+	}
+
+	@keyframes fly-1 {
+		from {
+			transform: translateY(0.1em);
+		}
+
+		to {
+			transform: translateY(-0.1em);
+		}
+	}
+</style>

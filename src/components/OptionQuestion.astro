@@ -1,0 +1,91 @@
+---
+interface Props {
+	numPregunta: number;
+	pregunta: string;
+	opciones: string[];
+}
+
+const { numPregunta, pregunta, opciones } = Astro.props;
+---
+
+<article class="question">
+    <span>{pregunta}</span>
+	<div class="options" id="pregunta">
+		{opciones.map((opcion) => (
+			<input type="radio" name={"pregunta"+numPregunta} value={opcion} id={opcion+numPregunta} />
+			<label for={opcion+numPregunta}>
+				{opcion}
+			</label>
+		))}
+	</div>
+</article>
+
+<style>
+	.question {
+		margin-bottom: 20px;
+	}
+
+	.question label {
+		display: block;
+		margin-bottom: 5px;
+		font-size: 0.75em;
+	}
+
+	.question span {
+		display: block;
+		margin-bottom: 20px;
+		font-size: 1.1em;
+	}
+
+	.options {
+		display: flex;
+		align-items: center;
+		justify-content: space-around
+	}
+
+	.options label {
+		margin: 0 10px;
+		display: flex;
+		align-items: flex-start;
+	}
+
+	.options input[type="radio"] {
+		margin-right: 5px;
+	}
+
+	#pregunta {
+		padding: 20px;
+		background: #FAFAFA;
+	}
+
+	#pregunta h2 {
+		margin-bottom: 10px;
+		font-weight: 600;
+		font-size: 20px;
+	}
+
+	#pregunta input[type=radio] {
+		display: none;
+	}
+
+	#pregunta label {
+		display: inline-block;
+		margin: 4px;
+		padding: 8px;
+		background: #FAE3BB;
+		color: #4C3000;
+		width: calc(50% - 8px);
+		min-width: 100px;
+		cursor: pointer;
+	}
+
+	#pregunta label:hover {
+		background: #EBBB67;
+	}
+
+	#pregunta input[type=radio]:checked + label {
+		background: #CB8306;
+		color: #FAFAFA;
+	}
+	
+</style>

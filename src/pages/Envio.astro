@@ -1,0 +1,161 @@
+---
+const valores1 = {
+  'Excelente': 5,
+  'Buena': 4,
+  'Regular': 3,
+  'Mala': 2,
+  'Muy mala': 1,
+
+  'Diariamente': 5,
+  'Varias veces a la semana': 4,
+  'Semanalmente': 3,
+  'Mensualmente': 2,
+  'Raramente/Nunca': 1,
+
+  'Si': 0,
+  'No': 5,
+
+  'Nunca': 5,
+  'Raramente': 4,
+  'A veces': 3,
+  'Frecuentemente': 2,
+  'Siempre': 1,
+
+  'Muy motivado': 5,
+  'Motivado': 4,
+  'Neutral': 3,
+  'Desmotivado': 2,
+  'Muy desmotivado': 1,
+
+  'Muy satisfecho': 5,
+  'Satisfecho': 4,
+  'Insatisfecho': 2,
+  'Muy insatisfecho': 1,
+}
+
+const valores2 = {
+  'Si': 5,
+  'No': 1,
+
+  'Siempre': 5,
+  'Frecuentemente': 4,
+  'A veces': 3,
+  'Raramente': 2,
+  'Nunca': 1
+}
+
+const data = await Astro.request.formData();
+const p1 = data.get('pregunta1').toString();
+const p2 = data.get('pregunta2').toString();
+const p3 = data.get('pregunta3').toString();
+const p4 = data.get('pregunta4').toString();
+const p5 = data.get('pregunta5').toString();
+const p6 = data.get('pregunta6').toString();
+const p7 = data.get('pregunta7').toString();
+const p8 = data.get('pregunta8').toString();
+const p9 = data.get('pregunta9').toString();
+const p10 = data.get('pregunta10').toString();
+const p11 = data.get('pregunta11').toString();
+const p12 = data.get('pregunta12').toString();
+const p13 = data.get('pregunta13').toString();
+const p14 = data.get('pregunta14').toString();
+const p15 = data.get('pregunta15').toString();
+
+const seccion1 = valores1[p1] + valores1[p2] + valores1[p3] + valores1[p4];
+const seccion2 = valores1[p5] + valores1[p6] + valores1[p7] + valores1[p8];
+const seccion3 = valores1[p9] + valores2[p10] + valores2[p11] + valores1[p12];
+const seccion4 = valores2[p13] + valores1[p14] + valores2[p15];
+
+let saludFisica, saludMental, motivacion, actividadFisica
+
+console.log(seccion3);
+
+switch (true) {
+  case(seccion1 >= 10):
+    saludFisica = 'Sigue manteniendo tu estilo de vida saludable';
+    break;
+  case(seccion1 >= 5):
+    saludFisica = 'Considera aumentar la frecuencia de tu actividad física.';
+    break;
+  case(seccion1 >= 0):
+    saludFisica = 'Es recomendable visitar a un profesional de la salud para una evaluación más detallada.';
+    break;
+}
+switch (true) {
+  case(seccion2 >= 10):
+    saludMental = 'Sigue cuidando tu bienestar mental.';
+    break;
+  case(seccion2 >= 5):
+    saludMental = 'Intenta implementar técnicas de manejo del estrés, como la meditación o el ejercicio.';
+    break;
+  case(seccion2 >= 0):
+    saludMental = 'Busca apoyo profesional para gestionar mejor el estrés y la ansiedad.';
+    break;
+}
+switch (true) {
+  case(seccion3 >= 10):
+    motivacion = 'Es genial ver que te sientes motivado. Sigue así.';
+    break;
+  case(seccion3 >= 5):
+    motivacion = "Intenta encontrar nuevos desafíos o proyectos que te inspiren."
+    break;
+  case(seccion3 >= 0):
+    motivacion = 'Habla con tu supervisor para ver cómo puedes encontrar más motivación en tu trabajo';
+    break;
+}
+
+switch (true) {
+  case(seccion4 >= 5):
+    actividadFisica = '}Sigue utilizando las instalaciones de la empresa y participando en programas';
+    break;
+  case(seccion4 >= 0):
+    actividadFisica = 'Considera participar en los programas de bienestar físico ofrecidos por la empresa.';
+    break;
+}
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Formulario Enviado">
+  <section class="formulario-enviado">
+    <h1 id="titulo">Formulario Enviado</h3>
+    <article>
+      <h2>Resultados</h2>
+      <p><strong>Salud Física:</strong> {saludFisica}</p>
+      <p><strong>Salud Mental:</strong> {saludMental}</p>
+      <p><strong>Motivación:</strong> {motivacion}</p>
+      <p><strong>Actividad Física:</strong> {actividadFisica}</p>
+    </article>
+  </section>
+</Layout>
+
+<style>
+  .formulario-enviado {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+
+  h1, h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+  }
+
+  #titulo {
+    text-align: center;
+    font-size: 2.5em;
+  }
+
+.resultados p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.resultados p strong {
+  color: #4CAF50;
+}
+</style>
